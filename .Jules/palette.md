@@ -1,0 +1,3 @@
+## 2025-02-15 - Dark Cinematic UI & Keyboard Navigation
+**Learning:** Replacing agentic neon gradients with deep zinc backgrounds and crimson highlights creates a cohesive, cinematic feel for video streaming interfaces. When adding custom keyboard navigation (`onKeyDown` handling for Space and Enter on custom interactive video cards), `focus-visible:ring-2` with `focus:outline-none` provides high-contrast focus indicators for accessibility without cluttering mouse clicks.
+**Action:** Always include keyboard action listeners (`Enter`/`Space`) and explicit `focus-visible` ring styling when converting clickable `div` components to interactive card buttons in dark mode media interfaces.

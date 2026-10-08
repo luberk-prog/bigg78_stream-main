@@ -9,22 +9,23 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#7c3aed',
-          light: '#8b5cf6',
-          dark: '#5b21b6',
+          DEFAULT: '#dc2626',
+          light: '#ef4444',
+          dark: '#b91c1c',
         },
         dark: {
-          900: '#0a0a0f',
-          800: '#111118',
-          700: '#1a1a24',
-          600: '#242433',
-          500: '#2e2e42',
-          400: '#3d3d55',
+          950: '#09090b',
+          900: '#121215',
+          800: '#18181b',
+          700: '#27272a',
+          600: '#3f3f46',
+          500: '#52525b',
+          400: '#71717a',
         },
         accent: {
-          purple: '#7c3aed',
-          pink: '#ec4899',
-          cyan: '#06b6d4',
+          red: '#dc2626',
+          amber: '#f59e0b',
+          emerald: '#10b981',
         }
       },
       fontFamily: {
@@ -32,7 +33,7 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #09090b 0%, #121215 50%, #09090b 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

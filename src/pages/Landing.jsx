@@ -37,79 +37,70 @@ export default function Landing() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-red-600 selection:text-white relative overflow-x-hidden">
-      {/* Navigation */}
+    <div className="min-h-screen bg-[#07080b] text-white font-sans selection:bg-red-600 selection:text-white relative overflow-x-hidden">
       <LandingNavbar />
 
-      {/* Hero Section with YouTube Slideshow */}
-      <HeroSlideshow videos={videos} isLoading={isLoading} />
+      <main className="relative z-10 pt-16 pb-16">
+        <HeroSlideshow videos={videos} isLoading={isLoading} />
 
-      {/* Main Content Area */}
-      <main className="relative z-10 space-y-12 pb-16">
-        {/* Trending YouTube Content Row */}
-        <TrendingSection videos={videos} isLoading={isLoading} />
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <TrendingSection videos={videos} isLoading={isLoading} />
 
-        {/* Feature / Vision Statement Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-zinc-900">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            <div className="space-y-3 p-6 rounded-lg bg-zinc-900/40 border border-zinc-800/60">
-              <div className="w-10 h-10 rounded bg-red-950/60 border border-red-900/50 flex items-center justify-center text-red-500 font-bold">
-                01
+          <section className="py-8 md:py-12 border-t border-white/10">
+            <div className="flex items-end justify-between gap-4 mb-8">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-500 mb-3">Why watch here</p>
+                <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">A better place to watch together</h2>
               </div>
-              <h3 className="text-lg font-bold text-white tracking-tight">
-                Find Something Worth Watching
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Explore popular YouTube trailers, videos, and live content with high-definition thumbnail previews and real-time metadata.
-              </p>
             </div>
 
-            <div className="space-y-3 p-6 rounded-lg bg-zinc-900/40 border border-zinc-800/60">
-              <div className="w-10 h-10 rounded bg-red-950/60 border border-red-900/50 flex items-center justify-center text-red-500 font-bold">
-                02
-              </div>
-              <h3 className="text-lg font-bold text-white tracking-tight">
-                Watch It Together
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Connect seamlessly with friends for synchronized viewing, shared reactions, and instant video navigation.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                {
+                  num: '01',
+                  title: 'Find something worth watching',
+                  text: 'Explore the biggest hits, trending clips, and crowd-favorite recommendations from the BIGG78 library.'
+                },
+                {
+                  num: '02',
+                  title: 'Watch together',
+                  text: 'Launch a room, sync with friends, and keep the viewing session social without leaving the stream.'
+                },
+                {
+                  num: '03',
+                  title: 'Stay in the story',
+                  text: 'Minimal distractions, stronger focus, and a visual experience built for cinematic content.'
+                }
+              ].map((item) => (
+                <article key={item.num} className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:bg-white/[0.04]">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-red-500/30 bg-red-500/10 text-sm font-black text-red-400">
+                    {item.num}
+                  </div>
+                  <h3 className="text-xl font-bold text-white tracking-tight mb-3">{item.title}</h3>
+                  <p className="text-sm leading-6 text-zinc-400">{item.text}</p>
+                </article>
+              ))}
             </div>
-
-            <div className="space-y-3 p-6 rounded-lg bg-zinc-900/40 border border-zinc-800/60">
-              <div className="w-10 h-10 rounded bg-red-950/60 border border-red-900/50 flex items-center justify-center text-red-500 font-bold">
-                03
-              </div>
-              <h3 className="text-lg font-bold text-white tracking-tight">
-                Cinematic & Uninterrupted
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Enjoy a clutter-free, distraction-free environment crafted specifically for high-fidelity media experience.
-              </p>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
 
-      {/* Minimalist Streaming Footer */}
-      <footer className="bg-zinc-950 border-t border-zinc-900 py-12 text-zinc-500 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <footer className="border-t border-white/10 bg-[#07080b]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between text-sm text-zinc-500">
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-white font-black text-xs">
-              B
-            </div>
-            <span className="text-sm font-bold text-zinc-300 tracking-tight uppercase">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-red-600 text-xs font-black text-white">B</div>
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-300">
               BIGG78 <span className="text-red-500">STREAM</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-6 font-medium">
-            <Link to="/login" className="hover:text-zinc-300 transition-colors">Sign In</Link>
-            <Link to="/search" className="hover:text-zinc-300 transition-colors">Browse</Link>
+          <div className="flex items-center gap-5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            <Link to="/login" className="hover:text-white transition-colors">Sign In</Link>
+            <Link to="/search" className="hover:text-white transition-colors">Browse</Link>
           </div>
 
-          <p className="text-zinc-600">
-            © {new Date().getFullYear()} BIGG78 STREAM. All rights reserved.
+          <p className="text-xs uppercase tracking-[0.18em] text-zinc-600">
+            © {new Date().getFullYear()} BIGG78 STREAM
           </p>
         </div>
       </footer>

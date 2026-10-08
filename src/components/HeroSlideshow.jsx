@@ -10,7 +10,6 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
   const slideCount = Math.min(videos.length, 5)
   const currentVideo = videos[currentIndex]
 
-  // Auto-rotate slideshow every 7 seconds
   useEffect(() => {
     if (slideCount <= 1 || isLoading) return
 
@@ -27,7 +26,7 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % slideCount)
       setIsTransitioning(false)
-    }, 300)
+    }, 250)
   }
 
   const handlePrev = () => {
@@ -36,7 +35,7 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + slideCount) % slideCount)
       setIsTransitioning(false)
-    }, 300)
+    }, 250)
   }
 
   const handleSelectSlide = (idx) => {
@@ -45,7 +44,7 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
     setTimeout(() => {
       setCurrentIndex(idx)
       setIsTransitioning(false)
-    }, 300)
+    }, 250)
   }
 
   const handleWatchNow = () => {
@@ -54,15 +53,25 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
     navigate(`/watch/${targetId}`)
   }
 
+  const handleBrowse = () => {
+    navigate('/search')
+  }
+
   if (isLoading || !currentVideo) {
     return (
-      <div className="relative w-full h-[75vh] sm:h-[82vh] bg-zinc-900 animate-pulse flex items-end p-6 sm:p-12 lg:p-16 border-b border-zinc-800/80">
-        <div className="max-w-2xl space-y-4 w-full">
-          <div className="w-24 h-6 bg-zinc-800 rounded"></div>
-          <div className="w-3/4 h-12 bg-zinc-800 rounded"></div>
-          <div className="w-1/2 h-5 bg-zinc-800 rounded"></div>
-          <div className="w-full h-16 bg-zinc-800 rounded"></div>
-          <div className="w-36 h-12 bg-zinc-800 rounded-md"></div>
+      <div className="relative w-full h-[72vh] min-h-[560px] bg-zinc-900 animate-pulse overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900" />
+        <div className="relative z-10 flex h-full max-w-[1440px] mx-auto items-end px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+          <div className="w-full max-w-2xl space-y-4">
+            <div className="h-6 w-28 rounded-full bg-zinc-800" />
+            <div className="h-14 w-3/4 rounded-xl bg-zinc-800" />
+            <div className="h-5 w-1/2 rounded-md bg-zinc-800" />
+            <div className="h-20 w-full rounded-xl bg-zinc-800" />
+            <div className="flex gap-4">
+              <div className="h-12 w-32 rounded-full bg-zinc-800" />
+              <div className="h-12 w-32 rounded-full bg-zinc-800" />
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -71,102 +80,94 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
   const videoId = currentVideo.id || currentVideo.youtubeId
 
   return (
-    <section aria-label="Featured videos carousel" className="relative w-full h-[78vh] sm:h-[84vh] min-h-[540px] bg-zinc-950 overflow-hidden select-none">
-      {/* Dynamic YouTube Background Image */}
+    <section aria-label="Featured videos carousel" className="relative h-[72vh] min-h-[560px] max-h-[900px] overflow-hidden bg-[#090b0f] select-none">
       <div className="absolute inset-0 z-0">
         <YouTubeImage
           videoId={videoId}
           src={currentVideo.thumbnail}
           alt={currentVideo.title}
-          className={`w-full h-full object-cover transition-opacity duration-700 ${
-            isTransitioning ? 'opacity-30 scale-105' : 'opacity-75 scale-100'
+          className={`h-full w-full object-cover object-center transition-all duration-500 ${
+            isTransitioning ? 'scale-105 opacity-40' : 'scale-100 opacity-90'
           }`}
         />
 
-        {/* Cinematic Overlay Treatments */}
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent w-full sm:w-[75%] lg:w-[60%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-transparent to-transparent h-32" />
+        <div className="absolute inset-0 bg-[#05070c]/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#090b0f] via-[#090b0f]/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#090b0f] via-[#090b0f]/25 to-transparent" />
       </div>
 
-      {/* Hero Content Area */}
-      <div className="relative z-10 max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 sm:pb-16 lg:pb-20">
-        <div
-          className={`max-w-3xl space-y-4 sm:space-y-5 transition-all duration-500 ${
-            isTransitioning ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
-          }`}
-        >
-          {/* Metadata & Tag */}
-          <div className="flex items-center gap-3 text-xs sm:text-sm font-medium">
-            <span className="px-2.5 py-1 rounded bg-red-600 text-white font-bold tracking-wide uppercase text-[11px]">
-              Trending #{currentIndex + 1}
+      <div className="relative z-10 mx-auto flex h-full max-w-[1440px] items-end px-4 pb-10 pt-24 sm:px-6 lg:px-8 lg:pb-14">
+        <div className="max-w-3xl transition-all duration-300">
+          <div className="mb-5 flex flex-wrap items-center gap-3 text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-zinc-200">
+            <span className="rounded-full border border-red-500/40 bg-red-500/20 px-3 py-1.5 text-red-300 shadow-[0_0_30px_rgba(239,68,68,0.22)]">
+              Featured now
             </span>
             {currentVideo.category && (
-              <span className="text-zinc-300 font-semibold uppercase tracking-wider text-[11px] bg-zinc-900/80 px-2.5 py-1 rounded border border-zinc-800">
+              <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-zinc-300 backdrop-blur-sm">
                 {currentVideo.category}
               </span>
             )}
             {currentVideo.duration && (
-              <span className="text-zinc-400 text-xs hidden xs:inline-block">
-                • {currentVideo.duration}
-              </span>
+              <span className="hidden text-zinc-400 sm:inline">{currentVideo.duration}</span>
             )}
             {currentVideo.views && (
-              <span className="text-zinc-400 text-xs hidden sm:inline-block">
-                • {currentVideo.views} views
-              </span>
+              <span className="hidden text-zinc-400 sm:inline">{currentVideo.views}</span>
             )}
           </div>
 
-          {/* Video Title */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] drop-shadow-md line-clamp-2">
+          <h1 className="max-w-2xl text-4xl font-black leading-[0.92] tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl">
             {currentVideo.title}
           </h1>
 
-          {/* Channel Info & Description */}
-          <div className="space-y-2">
-            <p className="text-zinc-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">
-              {currentVideo.channel}
-            </p>
-            {currentVideo.description && (
-              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed line-clamp-2 max-w-2xl font-normal drop-shadow-sm">
-                {currentVideo.description}
-              </p>
+          <div className="mt-5 flex items-center gap-3 text-xs sm:text-sm text-zinc-300">
+            {currentVideo.channel && (
+              <span className="font-semibold uppercase tracking-[0.16em] text-zinc-300/90">{currentVideo.channel}</span>
             )}
+            {currentVideo.views && <span className="text-zinc-500">•</span>}
+            {currentVideo.views && <span className="text-zinc-400">{currentVideo.views}</span>}
           </div>
 
-          {/* Primary Action Button */}
-          <div className="pt-2 flex items-center gap-4">
+          {currentVideo.description && (
+            <p className="mt-5 max-w-xl text-sm leading-6 text-zinc-300 sm:text-base">
+              {currentVideo.description}
+            </p>
+          )}
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <button
-              onClick={handleWatchNow}
               type="button"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-md bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold text-sm sm:text-base tracking-wide transition-colors shadow-lg shadow-red-950/50 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+              onClick={handleWatchNow}
+              className="inline-flex items-center gap-2.5 rounded-full bg-red-600 px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-white shadow-[0_16px_50px_rgba(239,68,68,0.38)] transition-all duration-200 hover:bg-red-500 active:scale-[0.98]"
             >
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
               Watch Now
             </button>
+
+            <button
+              type="button"
+              onClick={handleBrowse}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm transition-all duration-200 hover:bg-white/10 active:scale-[0.98]"
+            >
+              Browse
+            </button>
           </div>
         </div>
 
-        {/* Minimal Controls & Slideshow Pagination (Bottom Right) */}
         {slideCount > 1 && (
-          <div className="absolute bottom-8 right-4 sm:right-8 lg:right-12 z-20 flex items-center gap-4 bg-zinc-950/80 backdrop-blur-md px-4 py-2 rounded-full border border-zinc-800">
-            {/* Arrows */}
+          <div className="absolute bottom-8 right-4 z-20 flex items-center gap-3 rounded-full border border-white/10 bg-[#0c0e12]/80 px-3 py-2 backdrop-blur-md sm:right-8 lg:right-12">
             <button
               onClick={handlePrev}
               type="button"
               aria-label="Previous slide"
-              title="Previous slide"
-              className="p-1.5 text-zinc-400 hover:text-white transition-colors cursor-pointer rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-300 hover:bg-white/5 hover:text-white"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
-            {/* Slide Indicators */}
             <div className="flex items-center gap-1.5" role="tablist" aria-label="Slideshow pages">
               {Array.from({ length: slideCount }).map((_, idx) => (
                 <button
@@ -175,17 +176,15 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
                   role="tab"
                   aria-selected={idx === currentIndex}
                   onClick={() => handleSelectSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-red-500 ${
-                    idx === currentIndex
-                      ? 'w-6 bg-red-600'
-                      : 'w-1.5 bg-zinc-700 hover:bg-zinc-500'
+                  className={`h-1.5 rounded-full transition-all duration-200 ${
+                    idx === currentIndex ? 'w-8 bg-red-500' : 'w-2 bg-zinc-600 hover:bg-zinc-400'
                   }`}
                   aria-label={`Slide ${idx + 1}`}
                 />
               ))}
             </div>
 
-            <span className="text-xs font-semibold text-zinc-400 min-w-[28px] text-center" aria-live="polite">
+            <span className="min-w-[36px] text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
               {currentIndex + 1}/{slideCount}
             </span>
 
@@ -193,10 +192,9 @@ export default function HeroSlideshow({ videos = [], isLoading = false }) {
               onClick={handleNext}
               type="button"
               aria-label="Next slide"
-              title="Next slide"
-              className="p-1.5 text-zinc-400 hover:text-white transition-colors cursor-pointer rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-300 hover:bg-white/5 hover:text-white"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
             </button>

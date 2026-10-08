@@ -13,46 +13,46 @@ export default function LandingVideoCard({ video }) {
   }
 
   return (
-    <div
+    <button
+      type="button"
       onClick={handleClick}
-      className="group cursor-pointer flex flex-col space-y-2 select-none"
+      aria-label={`Watch ${video.title}`}
+      className="group block w-[250px] shrink-0 text-left sm:w-[280px]"
     >
-      {/* 16:9 Aspect Ratio Thumbnail Container */}
-      <div className="relative aspect-video w-full rounded-md overflow-hidden bg-zinc-900 border border-zinc-800/80">
-        <YouTubeImage
-          videoId={videoId}
-          src={video.thumbnail}
-          alt={video.title}
-          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 ease-out"
-        />
+      <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-zinc-900 shadow-[0_20px_50px_rgba(0,0,0,0.35)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-red-500/40 group-hover:shadow-[0_24px_60px_rgba(239,68,68,0.14)]">
+        <div className="aspect-video overflow-hidden">
+          <YouTubeImage
+            videoId={videoId}
+            src={video.thumbnail}
+            alt={video.title}
+            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+          />
+        </div>
 
-        {/* Hover Overlay with subtle Play Icon */}
-        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-          <div className="w-11 h-11 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
-            <svg className="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90" />
+
+        <div className="absolute inset-x-0 bottom-0 p-4">
+          <div className="flex items-center justify-between gap-3 text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-300">
+            {video.duration && <span>{video.duration}</span>}
+            {video.views && <span>{video.views}</span>}
+          </div>
+        </div>
+
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-200 group-hover:opacity-100">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600/95 text-white shadow-[0_15px_40px_rgba(239,68,68,0.45)]">
+            <svg className="ml-0.5 h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>
         </div>
-
-        {/* Duration Badge */}
-        {video.duration && (
-          <div className="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-bold text-zinc-200 tracking-wider">
-            {video.duration}
-          </div>
-        )}
       </div>
 
-      {/* Video Information */}
-      <div className="space-y-1 px-0.5">
-        <h3 className="text-sm font-semibold text-zinc-200 group-hover:text-white line-clamp-2 leading-snug transition-colors">
+      <div className="mt-3 space-y-1.5 px-1">
+        <h3 className="line-clamp-2 text-base font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-red-400">
           {video.title}
         </h3>
-        <div className="flex items-center justify-between text-xs text-zinc-400">
-          <span className="truncate max-w-[70%] font-medium">{video.channel}</span>
-          {video.views && <span>{video.views}</span>}
-        </div>
+        <p className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-400">{video.channel}</p>
       </div>
-    </div>
+    </button>
   )
 }

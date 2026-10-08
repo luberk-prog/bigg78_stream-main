@@ -13,11 +13,15 @@ export default function LandingNavbar() {
   }
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/90 via-black/50 to-transparent">
+    <header className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-zinc-950/90 via-zinc-950/50 to-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         {/* LEFT: Logo / Wordmark */}
-        <Link to="/" className="flex items-center gap-2 shrink-0 group">
-          <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center font-black text-white text-lg tracking-wider shadow-md shadow-red-900/30 group-hover:bg-red-500 transition-colors">
+        <Link
+          to="/"
+          aria-label="BIGG78 STREAM homepage"
+          className="flex items-center gap-2 shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg p-1"
+        >
+          <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center font-black text-white text-lg tracking-wider shadow-md shadow-red-950/30 group-hover:bg-red-500 transition-colors">
             B
           </div>
           <span className="text-xl font-bold tracking-tight text-white uppercase font-sans">
@@ -26,19 +30,20 @@ export default function LandingNavbar() {
         </Link>
 
         {/* CENTER: Search bar */}
-        <form onSubmit={handleSearch} className="flex-1 max-w-md mx-4 hidden sm:block">
+        <form onSubmit={handleSearch} role="search" className="flex-1 max-w-md mx-4 hidden sm:block">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               type="text"
+              aria-label="Search videos"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search videos..."
-              className="w-full pl-10 pr-4 py-2 bg-zinc-900/80 hover:bg-zinc-900 focus:bg-zinc-950 text-white placeholder-zinc-400 text-sm rounded-md border border-zinc-800 focus:border-zinc-500 focus:outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2 bg-zinc-900/80 hover:bg-zinc-900 focus:bg-zinc-950 text-white placeholder-zinc-500 text-sm rounded-md border border-zinc-800 focus:border-red-500 focus:outline-none transition-colors focus-visible:ring-1 focus-visible:ring-red-500"
             />
           </div>
         </form>
@@ -47,7 +52,7 @@ export default function LandingNavbar() {
         <div className="flex items-center gap-3 shrink-0">
           <Link
             to="/login"
-            className="px-5 py-2 rounded-md text-sm font-semibold text-white bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors shadow-sm"
+            className="px-5 py-2 rounded-md text-sm font-semibold text-white bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
           >
             Sign In
           </Link>
@@ -56,19 +61,20 @@ export default function LandingNavbar() {
 
       {/* Mobile Search field */}
       <div className="sm:hidden px-4 pb-3">
-        <form onSubmit={handleSearch} className="w-full">
+        <form onSubmit={handleSearch} role="search" className="w-full">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               type="text"
+              aria-label="Search videos mobile"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search videos..."
-              className="w-full pl-9 pr-3 py-1.5 bg-zinc-900/90 text-white placeholder-zinc-400 text-xs rounded border border-zinc-800 focus:outline-none"
+              className="w-full pl-9 pr-3 py-1.5 bg-zinc-900/90 text-white placeholder-zinc-500 text-xs rounded border border-zinc-800 focus:outline-none focus:border-red-500"
             />
           </div>
         </form>
